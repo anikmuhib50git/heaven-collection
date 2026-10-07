@@ -21,7 +21,8 @@ spec:
     spec:
       containers:
         - name: heaven-collection
-          image: ghcr.io/anikmuhib50git/heaven-collection:dc20daffbc170deea16289d8c9d8203a11ba3672
+          image: ghcr.io/anikmuhib50git/heaven-collection:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           readinessProbe:
