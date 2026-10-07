@@ -172,6 +172,21 @@
       background: var(--accent);
     }
 
+    .hero-price {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 8px 24px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+    }
+
     /* CATEGORIES */
     .section { padding: 80px 60px; }
 
@@ -659,7 +674,10 @@
       <a href="#" class="btn btn-outline">View Lookbook</a>
     </div>
   </div>
-  <div class="hero-img">👗</div>
+  <div class="hero-img">
+    👗
+    <span class="hero-price">$50</span>
+  </div>
 </section>
 
 <!-- CATEGORIES -->

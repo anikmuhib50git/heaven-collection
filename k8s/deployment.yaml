@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: heaven-collection
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heaven-collection-deployment
+  namespace: heaven-collection
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: heaven-collection
+  template:
+    metadata:
+      labels:
+        app: heaven-collection
+    spec:
+      containers:
+        - name: heaven-collection
+          image: ghcr.io/anikmuhib50git/heaven-collection:dc20daffbc170deea16289d8c9d8203a11ba3672
+          ports:
+            - containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: heaven-collection-service
+  namespace: heaven-collection
+spec:
+  selector:
+    app: heaven-collection
+  ports:
+    - port: 80
+      targetPort: 80
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: heaven-collection-ingress
+  namespace: heaven-collection
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: heaven.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: heaven-collection-service
+                port:
+                  number: 80
